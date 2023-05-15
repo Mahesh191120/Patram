@@ -43,28 +43,27 @@ def filteredData():
     expiryQuery=" and DATE_FORMAT(Subscription_End,'%Y-%m')= %s"
     activeQuery=" and DATE_FORMAT(Subscription_Start,'%Y-%m')<=%s and DATE_FORMAT(Subscription_End,'%Y-%m')>=%s"
     
-    
     if inputArray['allRecords']=='1':
         
         #print(mainQuery)
         cursor = mydb.cursor(dictionary=True)
-        cursor.execute( allRecordsQuery)
+        cursor.execute( allRecordsQuery,[date,date])
         rows=cursor.fetchall()
         print(rows)
         return jsonify(rows)
         
     elif inputArray['activeRecords']=='1':
         
-        #print(mainQuery+allRecordsQuery)
+       # print(mainQuery+allRecordsQuery)
         cursor=mydb.cursor(dictionary=True)
-        cursor.execute( allRecordsQuery+activeQuery,[date,date])
+        cursor.execute( allRecordsQuery+activeQuery,[date,date,date,date])
         rows=cursor.fetchall()
         print(rows)
         return jsonify(rows)
     elif inputArray['additionData']=='1':
         #print(mainQuery+additionQuery)
         cursor=mydb.cursor(dictionary=True)
-        cursor.execute( allRecordsQuery+additionQuery,[date])
+        cursor.execute( allRecordsQuery+additionQuery,[date,date,date])
         rows=cursor.fetchall()
         print(rows)
         return jsonify(rows)
@@ -72,7 +71,7 @@ def filteredData():
         
         #print(mainQuery+expiryQuery)
         cursor=mydb.cursor(dictionary=True)
-        cursor.execute( allRecordsQuery+expiryQuery,[date])
+        cursor.execute( allRecordsQuery+expiryQuery,[date,date,date])
         rows=cursor.fetchall()
         print(rows)
         return jsonify(rows)
