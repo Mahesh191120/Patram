@@ -38,11 +38,11 @@ def filteredData():
     data=request.json
     date=data.get('Input_date')
     inputArray=data.get('Input_array')
-    allRecordsQuery=" select customer_master.Date_Of_Registration,customer_master.Register_Email,customer_master.Customer_Id,customer_master.Approved_Date,customer_master.Next_Renewal,subsription_payment.Subscription_Start,subsription_payment.Subscription_End,subsription_payment.Payment_Type,subsription_payment.Payment_Date from customer_master left join subsription_payment on customer_master.Customer_Id=subsription_payment.Customer_Id"
-    #allRecordsQuery=" where DATE_FORMAT(Subscription_Start,'%Y-%m') <=%s and DATE_FORMAT(Subscription_End,'%Y-%m')>=%s"
-    additionQuery=" where DATE_FORMAT(Subscription_Start,'%Y-%m')=%s"
-    expiryQuery=" where DATE_FORMAT(Subscription_End,'%Y-%m')= %s"
-    activeQuery=" where DATE_FORMAT(Subscription_Start,'%Y-%m')<=%s and DATE_FORMAT(Subscription_End,'%Y-%m')>=%s"
+    allRecordsQuery=" select customer_master.Date_Of_Registration,customer_master.Register_Email,customer_master.Customer_Id,customer_master.Approved_Date,customer_master.Next_Renewal,subsription_payment.Subscription_Start,subsription_payment.Subscription_End,subsription_payment.Payment_Type,subsription_payment.Payment_Date from customer_master left join subsription_payment on customer_master.Customer_Id=subsription_payment.Customer_Id where DATE_FORMAT(Subscription_Start,'%Y-%m')<=%s and DATE_FORMAT(Subscription_End,'%Y-%m')>=%s"
+    additionQuery=" and DATE_FORMAT(Subscription_Start,'%Y-%m')=%s"
+    expiryQuery=" and DATE_FORMAT(Subscription_End,'%Y-%m')= %s"
+    activeQuery=" and DATE_FORMAT(Subscription_Start,'%Y-%m')<=%s and DATE_FORMAT(Subscription_End,'%Y-%m')>=%s"
+    
     
     if inputArray['allRecords']=='1':
         
