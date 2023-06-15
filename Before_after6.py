@@ -3,8 +3,6 @@ from email import message
 from flask import Flask,app,render_template,redirect
 
 import pymysql
-
-
 from flask import jsonify
 
 from flask import flash, request
